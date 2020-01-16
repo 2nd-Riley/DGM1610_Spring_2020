@@ -6,19 +6,25 @@ public class Var1 : MonoBehaviour
 {
 
     // Variables
-    string notSeven = "7";
-    float seven = 6.5f;
-    int child = 2;
+    public float amount;
+    public float money;
+    public float cost;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(child + seven + notSeven);
+        Cookies(amount, money, cost);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void Cookies(float amount, float money, float cost)
+    {
+        float total = money - amount * cost;
+        print(total);
     }
 }
