@@ -38,6 +38,6 @@ public class Var1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        Debug.Log("You have entered the trigger");
     }
 }
