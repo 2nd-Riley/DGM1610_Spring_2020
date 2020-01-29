@@ -6,23 +6,47 @@ public class Var1 : MonoBehaviour
 {
 
     // Variables
-    public float amount;
-    public float money;
-    public float cost;
+    public float speed;
+    public float turnSpeed;
+    public float verticleInput;
+    public float horizontalInput;
+    float horizontalCap;
+    float verticalCap;
 
     // Start is called before the first frame update
     void Start()
     {
-    
+        speed = 10;
+        verticalCap = 5;
+        horizontalCap = 11.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, 0, 0.1f);
+        verticleInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        //Rotates with left and right
+        //transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime * horizontalInput);
+        if (transform.position.z > -verticalCap && verticleInput < 0)
+        {
+            transform.Translate(Vector3.forward * verticleInput * speed * Time.deltaTime);
+        }
+        if (transform.position.z < verticalCap && verticleInput > 0)
+        {
+            transform.Translate(Vector3.forward * verticleInput * speed * Time.deltaTime);
+        }
+        if (transform.position.x > -horizontalCap && horizontalInput < 0)
+        {
+            transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
+        }
+        if (transform.position.x < horizontalCap && horizontalInput > 0)
+        {
+            transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /* private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Floor"))
         {
@@ -39,5 +63,5 @@ public class Var1 : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("You have entered the trigger");
-    }
+    }  */
 }
