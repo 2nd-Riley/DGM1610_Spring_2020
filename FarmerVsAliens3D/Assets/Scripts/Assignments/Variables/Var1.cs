@@ -13,18 +13,31 @@ public class Var1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cookies(amount, money, cost);
+    
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(0, 0, 0.1f);
     }
 
-    void Cookies(float amount, float money, float cost)
+    private void OnCollisionEnter(Collision collision)
     {
-        float total = money - amount * cost;
-        print(total);
+        if(collision.gameObject.CompareTag("Floor"))
+        {
+            Debug.Log("Hit the floor");
+        } else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("Hit an object");
+        } else
+        {
+            Debug.Log("...");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
     }
 }
