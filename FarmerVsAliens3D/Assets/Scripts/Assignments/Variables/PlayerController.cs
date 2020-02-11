@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Var1 : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     // Variables
@@ -10,15 +10,18 @@ public class Var1 : MonoBehaviour
     public float turnSpeed;
     public float verticleInput;
     public float horizontalInput;
-    float horizontalCap;
-    float verticalCap;
+    //float horizontalCap;
+    //float verticalCap;
+
+    public GameObject projectilePrefab;
 
     // Start is called before the first frame update
     void Start()
     {
         speed = 10;
-        verticalCap = 5;
-        horizontalCap = 11.5f;
+        turnSpeed = 100;
+        //verticalCap = 5;
+        //horizontalCap = 11.5f;
     }
 
     // Update is called once per frame
@@ -27,22 +30,12 @@ public class Var1 : MonoBehaviour
         verticleInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
         //Rotates with left and right
-        //transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime * horizontalInput);
-        if (transform.position.z > -verticalCap && verticleInput < 0)
-        {
+            transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime * horizontalInput);
             transform.Translate(Vector3.forward * verticleInput * speed * Time.deltaTime);
-        }
-        if (transform.position.z < verticalCap && verticleInput > 0)
+
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            transform.Translate(Vector3.forward * verticleInput * speed * Time.deltaTime);
-        }
-        if (transform.position.x > -horizontalCap && horizontalInput < 0)
-        {
-            transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
-        }
-        if (transform.position.x < horizontalCap && horizontalInput > 0)
-        {
-            transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
     }
 
@@ -58,10 +51,10 @@ public class Var1 : MonoBehaviour
         {
             Debug.Log("...");
         }
-    }
+    } */
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("You have entered the trigger");
-    }  */
+        Destroy(other.gameObject);
+    }
 }
